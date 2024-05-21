@@ -1,0 +1,82 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class PopUpImg1 {
+    private JFrame frame;
+    private JPopupMenu popupMenu;
+
+    public PopUpImgrem() {
+        frame = new JFrame("Popup Menu Example");
+        frame.setSize(400, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
+	frame = new JFrame("Popup Remove Example");
+        frame.setSize(400, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JButton showPopupButton = new JButton("Menu");
+        showPopupButton.setBounds(90, 75, 200, 30);
+        showPopupButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                showPopupMenu(showPopupButton);
+
+	JButton showPopupButton = new JButton("Remove");
+        showPopupButton.setBounds(90, 75, 200, 30);
+        showPopupButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                showPopupMenu(showPopupButton);
+            }
+        });
+
+        frame.add(showPopupButton);
+	frame.add(showRemoveButton);
+        frame.setLayout(null);
+        frame.setVisible(true);
+
+        popupMenu = new JPopupMenu();
+
+        // Create a JMenuItem for opening the image
+        JMenuItem openImageItem = new JMenuItem("Open Image");
+        openImageItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                showImage();
+            }
+        });
+        popupMenu.add(openImageItem);
+
+        // Add a JMenuItem for closing the popup
+        JMenuItem closeItem = new JMenuItem("Close");
+        closeItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                popupMenu.setVisible(false);
+            }
+        });
+        popupMenu.addSeparator();
+        popupMenu.add(closeItem);
+
+        // Add an image to the popup
+        ImageIcon imageIcon = new ImageIcon("Goku-4K-Wallpaper.jpeg");
+        JLabel imageLabel = new JLabel(imageIcon);
+        popupMenu.add(imageLabel);
+    }
+
+    public void showPopupMenu(Component component) {
+        // Adjust the position of the popup menu based on the component's location
+        int x = component.getLocationOnScreen().x;
+        int y = component.getLocationOnScreen().y + component.getHeight();
+        popupMenu.show(component, x, y);
+    }
+
+    public void showImage() {
+        JOptionPane.showMessageDialog(frame, "Image Clicked!");
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new PopUpImg();
+            }
+        });
+    }
+}
